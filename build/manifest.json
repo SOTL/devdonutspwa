@@ -3,7 +3,7 @@
     "background_color": "#2daa56",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/devdonutspwa/",
+    "start_url": "/",
     "name": "Dev & Donuts PWA",
     "short_name": "DDPWA",
     "description": "Dev & Donuts PWA",

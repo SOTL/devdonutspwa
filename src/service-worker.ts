@@ -12,7 +12,7 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -68,6 +68,14 @@ registerRoute(
     ],
   })
 );
+
+registerRoute(
+  ({ url }) => url.host === 'picsum.photos',
+  new NetworkFirst({
+    cacheName: 'random-images',
+    plugins: [new ExpirationPlugin({ maxEntries: 50 })]
+  })
+)
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
